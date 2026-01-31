@@ -342,6 +342,7 @@ text-align: center;
     height: 5vh;
     margin-top: 20px;
     justify-content: center;
+    font-size: clamp(12px, 2vw, 20px); 
 }
 #id-head-table{
     background-color: #fa862e;
@@ -367,9 +368,11 @@ text-align: center;
 }
 
 .table-body{
-    width: 10vw;
+    width: 50vw;
     height: 5vh;
-    margin-top: 20px;    
+    margin-top: 20px;
+    justify-content: center;  
+    font-size: clamp(12px, 2vw, 20px); 
 }
 .id-body-table{
     background-color: #fa862e;
