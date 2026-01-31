@@ -1,0 +1,588 @@
+
+
+/********************************* home ***************************************/
+body{
+    margin: 0;
+    background-color: #473104;
+}
+.cntnr{
+    display: flex;
+    
+}
+.shemsyinfos{
+    display: block;
+    width: 100%;
+    justify-content: center;
+}
+.logo1{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+    justify-content: center;
+    justify-self: center;
+    
+}
+.name1{
+    display: flex;
+    justify-content: center;
+}
+.name2{
+    font-size: x-large;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #F3BB00;
+}
+.space1{
+    display: flex;
+    height: 80px;
+}
+.space2{
+    display: flex;
+    height: vh;
+}
+.cardsbackground{
+    background-color: #e9c56a00;
+    border: 3px solid #e9c46a;
+    transition: 0.6s all;
+}
+.cardscolor{
+    color: #e9c46a;
+    fill: #e9c46a;
+    transition: 0.6s all;
+}
+.cardtext{
+    color: white;
+    transition: 0.6s all;
+}
+.cardsbackground:hover {
+    background-color: #e9c56a;
+    border: 3px solid #e9c46a;
+    transition: 0.6s all;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.788);
+    cursor: pointer;
+}
+.cardsbackground:hover .cardscolor {
+    color: #93441A;
+    fill: #93441A;
+}
+.cardsbackground:hover .cardtext{
+    color: #000;
+}
+
+/********************************* New Student ***************************************/
+.cntrr1{
+    background-color: #f3ba0000;
+    border: 2px solid #F3BB00;
+    height: 60px;
+    width: 60px;
+    margin-left: 3vh ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: 0.6s all;
+}
+.backing{
+    height: 40px;
+    width: 40px;   
+    fill: #F3BB00; 
+    transition: 0.6s all;
+}
+.cntrr1:hover {
+    background-color: #F3BB00;
+    border: 2px solid #F3BB00;
+    transform:translateX(-5px) ;
+    cursor: pointer;
+}
+.cntrr1:hover .backing {
+    fill: #0f0700ea; 
+}
+.space3{
+    display: flex;
+    height: 10px;
+}
+
+/* ===== Reset ===== */
+.page {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #0f0700, #b6743200);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Container ===== */
+.form-container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== Card ===== */
+.form-card {
+  width: 100%;
+  max-width: 800px;
+  background: #B67332;
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 40px 25px 30px;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
+  position: relative;
+  text-align: center;
+}
+
+/* ===== Avatar ===== */
+.form-avatar {
+  width: 90px;
+  height: 90px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.form-avatar-icon {
+  font-size: 40px;
+  color: #777;
+}
+
+/* ===== Title ===== */
+.form-title {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #555;
+}
+
+/* ===== Inputs ===== */
+.form-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #47310400;
+  transition: 0.6s all;
+}
+.form-group:hover {
+ border: 2px solid #473104;
+ 
+}
+
+.form-icon {
+  font-size: 18px;
+  color: #888;
+  margin-right: 10px;
+}
+
+.form-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* ===== Button ===== */
+.form-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  background: #473104;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form-button:hover {
+  background: #93441A;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .form-card {
+    padding: 35px 20px 25px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+
+  .form-avatar {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+  }
+
+  .form-avatar-icon {
+    font-size: 22px;
+  }
+}
+
+
+
+/********************************* Students List ***************************************/
+/*titre*/
+#list-titre-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    border-top: 2px solid #f9b17a;
+}
+#list-titre{
+    margin-top: 50px;
+    color: #f9b17a;
+    font-size: xx-large;
+    font-weight: bolder;
+    font-style: normal;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+/*search input*/
+#input-search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+#group-input-container{
+    background-color: #93441a00;
+    display: flex;
+    height: 40px;
+}
+#searchicon-container{
+    display: flex;
+    background-color: #f9b17a;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#searchicon{
+    color: #ffffff;
+    
+}
+#input-search{
+    background-color: #2d3250;
+    border: 2px solid #f9b17a;
+    width: 50vw;
+    transition: all 0.3s;
+    color: #fafafa;
+    font-size: large;
+    font-weight: bold;
+}
+#input-search:hover {
+    background-color: #f9b17a;
+    
+}
+#input-search:focus{
+    background-color: #f9b17a;
+    border:0px;
+}
+
+#input-titre-container{
+    display: flex;
+    justify-content: center;
+    background-color: #f9b17a;
+    width: 100px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    transition: all 0.3s;
+    border: 2px solid #f9b17a00;
+}
+#input-titre-container:hover{
+    background-color: #00000000;
+    border: 2px solid #f9b17a;
+    cursor: pointer;
+    
+}
+#input-titre{
+    color: #2d3250;
+    font-size: x-large;
+    font-weight: bolder;
+    
+}
+#input-titre-container:hover #input-titre{
+    color: #f9b17a;
+}
+/*********************************students list*************************/
+
+
+th, td {
+border: 3px solid #2d3250;
+padding: 8px;
+text-align: center;
+}
+
+
+/*****Table Head******/
+#list-container{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.table-head{
+    width: 50vw;
+    height: 5vh;
+    margin-top: 20px;
+    justify-content: center;
+}
+#id-head-table{
+    background-color: #fa862e;
+}
+#First-Name-head-table{
+    background-color: #ff9f55;
+}
+#Second-Name-head-table{
+    background-color: #ffb881;
+}
+#Age-head-table{
+    background-color: #e5b48f;
+}
+#Division-head-table{
+    background-color: #f0d1b9;
+}
+#Level-head-table{
+    background-color: #fff2e6;
+}
+/*****Table Body******/
+.tableBody{
+    max-width: 800px;
+}
+
+.table-body{
+    width: 10vw;
+    height: 5vh;
+    margin-top: 20px;    
+}
+.id-body-table{
+    background-color: #fa862e;
+    font-weight: bold;
+    
+}
+.pfp-body-table{
+    width: 5vh;
+    background-color: #fa862e;
+    font-weight: bold;
+    color: #ffffff;
+    transition: 0.3s all;
+}
+.pfp-body-table:hover{
+    color: #fa862e;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+}
+.First-Name-body-table{
+    background-color: #ff9f55;
+    font-weight: bold;
+    color: #000000;
+}
+.Second-Name-body-table{
+    background-color: #ffb881;
+    font-weight: bold;
+    color: #000000;
+}
+.Age-body-table{
+    background-color: #e5b48f;
+    font-weight: bold;
+    color: #000000;
+}
+.Division-body-table{
+    background-color: #f0d1b9;
+    font-weight: bold;
+    color: #000000;
+}
+.Level-body-table{
+    background-color: #fff2e6;
+    font-weight: bold;
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+/* ===== Overlay ===== */
+#overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:1000;
+}
+
+/* ===== Card ===== */
+.custom-modal{
+  background:#fff;
+  width:380px;
+  height:540px;
+  border-radius:18px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 15px 30px rgba(255, 255, 255, 0.658);
+  overflow:hidden;
+}
+
+/* ===== Header ===== */
+.pfp-window-head{
+  display:flex;
+  padding:15px 20px;
+  position:relative;
+  z-index:3;
+}
+.titre-pfp-window{
+  width:50%;
+  font-weight:bold;
+  font-family: "Alkatra", system-ui;
+  font-size: x-large; 
+  color: #000;
+}
+.exitcntnr{
+  width:50%;
+  display:flex;
+  justify-content:flex-end;
+}
+.bi-x{
+  font-size:32px;
+  cursor:pointer;
+  color: #000;
+}
+.bi-x:hover{color:red}
+
+/* ===== Top Shape ===== */
+.card-top-shape{
+  position:absolute;
+  top:0;
+  width:100%;
+  height:150px;
+  background:#1e4ed8;
+  border-bottom-left-radius:60px;
+}
+
+/* ===== Photo ===== */
+.pfp-imgg-container{
+  position:absolute;
+  top:85px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  text-align:center;
+}
+.pfp-imgg{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:6px solid #1e4ed8;
+}
+
+/* ===== ID under photo ===== */
+.pfp-id{
+  margin-top:8px;
+  font-weight:bold;
+  font-size: x-large;
+  color:#1e4ed8;
+  font-family: "Ubuntu", sans-serif;
+}
+
+/* ===== Body ===== */
+.pfp-window-body{
+  margin-top:165px;
+  display:flex;
+  justify-content:center;
+  font-family: "Ubuntu", sans-serif;
+  
+}
+.pfp-window-body-right{
+  width:100%;
+}
+.infos-pfp-window{
+  display:flex;
+  justify-content:center;
+  font-size:18px;
+  margin:8px 0;
+  color: #000;
+  height: 20px;
+}
+
+/* ===== Footer (space added) ===== */
+.pfp-window-footer{
+  position:absolute;
+  bottom:75px;
+  width:100%;
+  display:flex;
+   
+}
+.pfp-window-footer-left,
+.pfp-window-footer-right{
+  width:50%;
+  display:flex;
+  justify-content:center;
+}
+
+/* ===== Buttons ===== */
+.markabsence-button{
+  background:transparent;
+  border:3px solid blue;
+  color:blue;
+  padding:10px 14px;
+  border-radius:15px;
+  font-weight:bold;
+  display:flex;
+  gap:6px;
+  transition:.3s;
+  font-family: "Ubuntu", sans-serif;
+}
+.markabsence-button:hover{
+  background:blue;
+  color:white;
+  cursor:pointer;
+}
+
+.removestudent-button{
+  background:transparent;
+  border:3px solid red;
+  color:red;
+  padding:10px 14px;
+  border-radius:15px;
+  font-weight:bold;
+  display:flex;
+  gap:6px;
+  transition:.3s;
+  font-family: "Ubuntu", sans-serif;
+}
+.removestudent-button:hover{
+  background:red;
+  color:white;
+  cursor:pointer;
+}
+
+/* ===== Bottom Shape ===== */
+.card-bottom-shape{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:60px;
+  background:#1e4ed8;
+  border-top-right-radius:60px;
+}
