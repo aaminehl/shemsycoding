@@ -342,7 +342,7 @@ text-align: center;
     height: 5vh;
     margin-top: 20px;
     justify-content: center;
-    font-size: clamp(12px, 2vw, 20px); 
+    font-size: clamp(10px, 2vw, 20px); 
 }
 #id-head-table{
     background-color: #fa862e;
@@ -372,7 +372,7 @@ text-align: center;
     height: 5vh;
     margin-top: 20px;
     justify-content: center;  
-    font-size: clamp(12px, 2vw, 20px); 
+    font-size: clamp(10px, 2vw, 20px); 
 }
 .id-body-table{
     background-color: #fa862e;
