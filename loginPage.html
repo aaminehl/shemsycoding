@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shemsy Coding</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9800, #ffc107);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MAIN */
+.auth-container {
+  width: 90%;
+  max-width: 1100px;
+  height: 600px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+
+/* LEFT */
+.auth-left {
+  width: 40%;
+  padding: 50px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-left h2 {
+  font-size: 32px;
+}
+
+.auth-left p {
+  color: #aaa;
+  margin: 10px 0 30px;
+}
+
+.auth-left input {
+  background: #1c1c1c;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #fff;
+  outline: none;
+  outline: 1px solid #ff990000;
+}
+
+.auth-left input:focus {
+  outline: 1px solid #ff9800;
+}
+
+.password-box {
+  position: relative;
+  
+}
+
+#toggle {
+  cursor: pointer;
+  color: #aaa;
+  transition: 0.2s;
+}
+#toggle:hover {
+  color: #ffc107;
+  cursor: pointer;
+}
+.forgot {
+  color: #ffc107;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ff9800, #ffc107);
+  color: #111;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,193,7,0.4);
+}
+
+
+/* RIGHT */
+.auth-right {
+  width: 60%;
+  background-image: url(images/wallpapers/loginwllppr.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* BLUR OVERLAY */
+.overlay {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 193, 7, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  color: #111;
+}
+
+.overlay h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.overlay span {
+  font-weight: 700;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 900px) {
+  .auth-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+  }
+
+  .overlay {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-left {
+    padding: 30px;
+  }
+
+  .overlay h1 {
+    font-size: 28px;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="auth-container">
+
+  <!-- LEFT -->
+  <div class="auth-left">
+    <h2>Login</h2>
+    <p>Enter your informations</p>
+
+    <input type="text" id="username" placeholder="Username">
+
+    <div class="password-box">
+      <input type="password" id="password" placeholder="Password">
+      <i class="bi bi-eye" onclick="togglePassword()" id="toggle"></i>
+    </div>
+
+    <a class="forgot" id="wrong">Password? ask the boss</a>
+
+    <button onclick="trylogin()">Enter</button>
+
+    
+  </div>
+
+  <!-- RIGHT -->
+  <div class="auth-right">
+    <div class="overlay">
+      <h1>Welcome to<br><span>Shemsy Coding Administration</span></h1>
+      <p>Login to access to the administrative page</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+    let datausername = 'Admin123'
+    let datapassword = '12345678'
+    let username = document.getElementById('username');
+    let pass = document.getElementById("password");
+
+    function trylogin(){
+        if(username.value === datausername && pass.value === datapassword ){
+          window.location.href = 'home.html'
+        }else{
+          document.getElementById('wrong').innerHTML = 'The informations are wrong </br> Try Again' ;
+          document.getElementById('wrong').style.color = 'red';
+          document.getElementById('username').style.outline= '1px solid red';
+          document.getElementById('password').style.outline= '1px solid red';
+        }
+    }
+
+
+
+    function togglePassword(){
+        let pass = document.getElementById("password");
+        if(pass.type === "password"){
+            pass.type = "text";
+        }else{
+            pass.type = "password"
+        }
+
+    }
+    
+
+</script>
+</body>
+</html>

@@ -52,6 +52,7 @@ function SaveData(){
     
     let count = students.length;
     localStorage.setItem("StudentsNumberr", count);
+    location.reload();
     
     
 }
@@ -75,6 +76,7 @@ for(i=0 ; i<talamidnumber ; i++){
     `
 }
 
+let studentshowup = ""
 
 function showpfp(element){
     document.getElementById("overlay").style.display = "block";
@@ -85,11 +87,17 @@ function showpfp(element){
     document.getElementById('pfp-window-age').innerHTML =  talamid[StudentIndex].age
     document.getElementById('pfp-window-division').innerHTML =  talamid[StudentIndex].division
     document.getElementById('pfp-window-level').innerHTML =  talamid[StudentIndex].level
-    function removestudent(){
-        
-    }
+    studentshowup = StudentIndex
     
 }   
+function removestudent() {
+    if (studentshowup === "") return;
+    talamid.splice(studentshowup, 1);
+    localStorage.setItem("students", JSON.stringify(talamid));
+    localStorage.setItem("StudentsNumberr", talamid.length);
+    closeModal();
+    location.reload();
+} 
 
 function closeModal() {
   document.getElementById("overlay").style.display = "none";

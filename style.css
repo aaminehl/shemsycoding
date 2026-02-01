@@ -74,8 +74,8 @@ body{
 .cntrr1{
     background-color: #f3ba0000;
     border: 2px solid #F3BB00;
-    height: 60px;
-    width: 60px;
+    height: 4vh;
+    width: 4vh;
     margin-left: 3vh ;
     display: flex;
     justify-content: center;
@@ -84,8 +84,8 @@ body{
     transition: 0.6s all;
 }
 .backing{
-    height: 40px;
-    width: 40px;   
+    height: 3vh;
+    width: 3vh;   
     fill: #F3BB00; 
     transition: 0.6s all;
 }
