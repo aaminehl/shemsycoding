@@ -1,9 +1,33 @@
 //**********************************NewStudent*************************************//
 
+function generateID() {
 
+    // نأخذ الطلاب من localStorage
+    let students = localStorage.getItem("students");
+
+    // إذا لا يوجد طلاب نبدأ بمصفوفة فارغة
+    if (students) {
+        students = JSON.parse(students);
+    } else {
+        students = [];
+    }
+
+    let newID;
+
+    // إذا كان هناك طلاب
+    if (students.length > 0) {
+        newID = students[students.length - 1].id + 1;
+    } else {
+        newID = 1;
+    }
+
+    // إظهار الـ ID في input
+    document.getElementById("iiid").value = newID;
+}
 
 function SaveData(){
-    let id = document.getElementById("iiid").value;
+    
+    let id = Number(document.getElementById("iiid").value);
     let FirstName = document.getElementById('firstname').value;
     let SecondName = document.getElementById('scndname').value;
     let age = document.getElementById('ageee').value;
@@ -39,9 +63,7 @@ function SaveData(){
     localStorage.setItem("students", JSON.stringify(students));
 
     
-
-
-
+ 
     // write againnn *******
     document.getElementById("iiid").value = "";
     document.getElementById("firstname").value = "";
@@ -52,9 +74,8 @@ function SaveData(){
     
     let count = students.length;
     localStorage.setItem("StudentsNumberr", count);
+    
     location.reload();
-    
-    
 }
 
 //**********************************Students*************************************//
@@ -81,15 +102,18 @@ let studentshowup = ""
 function showpfp(element){
     document.getElementById("overlay").style.display = "block";
     let StudentIndex = element.dataset.index;
+    let avatar = document.getElementById("avatar");
     document.getElementById('pfp-window-idd').innerHTML = '#000' + talamid[StudentIndex].id
     document.getElementById('pfp-window-fname').innerHTML =  talamid[StudentIndex].FirstName
     document.getElementById('pfp-window-sname').innerHTML =  talamid[StudentIndex].SecondName
     document.getElementById('pfp-window-age').innerHTML =  talamid[StudentIndex].age
     document.getElementById('pfp-window-division').innerHTML =  talamid[StudentIndex].division
     document.getElementById('pfp-window-level').innerHTML =  talamid[StudentIndex].level
+    avatar.textContent = talamid[StudentIndex].FirstName.charAt(0).toUpperCase() + talamid[StudentIndex].SecondName.charAt(0).toUpperCase();
     studentshowup = StudentIndex
     
 }   
+
 function removestudent() {
     if (studentshowup === "") return;
     talamid.splice(studentshowup, 1);

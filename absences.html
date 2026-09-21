@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Absences Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root {
+  --primary-color: #ea580c;
+  --secondary-color: #f97316;
+  --accent-color: #f59e0b;
+  --dark-bg: #1f2937;
+  --card-bg: #ffffff;
+  --hover-bg: #fff7ed;
+}
+
+body {
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+  font-family: "Segoe UI", "Tahoma", "Geneva", "Verdana", sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== Top Bar ===== */
+.top-bar {
+  background: linear-gradient(90deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 15px 40px rgba(234, 88, 12, 0.2);
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-title h4 {
+  font-weight: 700;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ===== Date Navigation ===== */
+.date-navigation {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.date-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.date-btn:hover {
+  background: var(--accent-color);
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+}
+
+.date-display {
+  text-align: center;
+  min-width: 150px;
+}
+
+.date-number {
+  font-size: 28px;
+  font-weight: 800;
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.date-day {
+  font-size: 14px;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== Cards ===== */
+.absence-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(234, 88, 12, 0.08);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid #fed7aa;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.absence-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 20px 0 0 20px;
+}
+
+.absence-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(234, 88, 12, 0.15);
+  border-color: var(--primary-color);
+  background: var(--hover-bg);
+}
+
+/* ===== Avatar ===== */
+.avatar-container {
+  position: relative;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+}
+
+.avatar:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Student Info ===== */
+.student-info {
+  flex-grow: 1;
+}
+
+.student-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-bg);
+  margin-bottom: 5px;
+}
+
+.student-id {
+  font-size: 13px;
+  color: #6b7280;
+  font-family: monospace;
+  background: #fef3c7;
+  padding: 3px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.student-details {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.student-details span {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ===== Calendar Side ===== */
+.calendar-sidebar {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(234, 88, 12, 0.08);
+  border: 1px solid #fed7aa;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #fed7aa;
+}
+
+.calendar-header h5 {
+  font-weight: 700;
+  color: var(--dark-bg);
+  margin: 0;
+}
+
+.custom-datepicker {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #fed7aa;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-bg);
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-datepicker:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary-action {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary-action:hover {
+  background: #c2410c;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(234, 88, 12, 0.3);
+}
+
+.btn-secondary-action {
+  background: #fef3c7;
+  color: var(--dark-bg);
+  border: 1px solid #fed7aa;
+}
+
+.btn-secondary-action:hover {
+  background: #fde68a;
+  transform: translateY(-3px);
+}
+
+/* ===== Delete Button ===== */
+.delete-btn {
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.delete-btn:hover {
+  color: #991b1b;
+  background: rgba(220, 53, 69, 0.2);
+  transform: rotate(15deg);
+}
+
+/* ===== Modal ===== */
+.modal-content {
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 25px;
+  border-bottom: none;
+}
+
+.modal-title {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 13px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-bg);
+  padding: 12px 20px;
+  background: #fffbeb;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-state i {
+  font-size: 48px;
+  color: #22c55e;
+}
+
+/* ===== Badge ===== */
+.absence-badge {
+  background: var(--primary-color);
+  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+/* ===== Note Box ===== */
+.note-box {
+  background: #fffbeb;
+  border-radius: 15px;
+  padding: 15px;
+  border-left: 4px solid var(--accent-color);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .date-navigation {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container my-5">
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <div class="header-title">
+    <i class="bi bi-calendar-check-fill" style="font-size: 28px;"></i>
+    <h4>School Absences Management</h4>
+  </div>
+
+  <div class="date-navigation">
+    <button class="date-btn" onclick="changeDay(-1)" title="Previous Day">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    
+    <div class="date-display">
+      <span id="dayNumber" class="date-number"></span>
+      <span id="dayName" class="date-day"></span>
+    </div>
+    
+    <button class="date-btn" onclick="changeDay(1)" title="Next Day">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="header-actions">
+    <button class="btn-action btn-secondary-action" onclick="goToAnotherPage()">
+      <i class="bi bi-box-arrow-up-right"></i>
+      Other Page
+    </button>
+    <button class="btn-action btn-primary-action" onclick="exportToPDF()">
+      <i class="bi bi-file-earmark-pdf"></i>
+      Export PDF
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <!-- ===== ABSENCES LIST ===== -->
+  <div class="col-lg-8">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h5 class="fw-bold">
+        <i class="bi bi-people-fill me-2"></i>
+        Daily Absences List
+      </h5>
+      <span id="absenceCount" class="badge absence-badge">0 absences</span>
+    </div>
+    
+    <div id="absenceList" class="row g-4"></div>
+  </div>
+
+  <!-- ===== CALENDAR SIDEBAR ===== -->
+  <div class="col-lg-4">
+    <div class="calendar-sidebar">
+      <div class="calendar-header">
+        <i class="bi bi-calendar3" style="font-size: 24px; color: var(--primary-color);"></i>
+        <h5>Select Date</h5>
+      </div>
+      
+      <input type="date" id="daySelector" class="custom-datepicker">
+      
+      <div class="action-buttons mt-3">
+        <button class="btn-action btn-secondary-action" onclick="resetToToday()">
+          <i class="bi bi-arrow-clockwise"></i>
+          Today
+        </button>
+      </div>
+      
+      <div class="note-box mt-4">
+        <h6 class="fw-bold mb-2"><i class="bi bi-info-circle"></i> Note</h6>
+        <p class="small text-muted mb-0">Click on student's avatar to view full information. You can delete any record by clicking the trash icon.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ===== STUDENT MODAL ===== -->
+<div class="modal fade" id="studentModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-person-badge-fill"></i>
+          Student Information
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="info-grid" id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const absenceList = document.getElementById("absenceList");
+const daySelector = document.getElementById("daySelector");
+const dayNumber = document.getElementById("dayNumber");
+const dayName = document.getElementById("dayName");
+const absenceCount = document.getElementById("absenceCount");
+
+// Sample absences data
+let absences = JSON.parse(localStorage.getItem("absences")) || {
+  "2026-10-12": [
+    {id: 101, name: "Amin H.", avatar: "AH", reason: "Medical leave", time: "Morning"},
+    {id: 102, name: "MZIDIKABIR", avatar: "MK", reason: "Family trip", time: "Full day"}
+  ],
+  "2026-10-13": [
+    {id: 103, name: "Sarah Ahmed", avatar: "SA", reason: "Family emergency", time: "Morning"},
+    {id: 104, name: "John Doe", avatar: "JD", reason: "Dental appointment", time: "Afternoon"}
+  ],
+  "2026-10-14": [
+    {id: 105, name: "Emily Chen", avatar: "EC", reason: "School event", time: "Full day"}
+  ]
+};
+
+let currentDate = new Date();
+
+/* ===== Different colors for avatars ===== */
+function getAvatarColor(id){
+  const colors = [
+    "#ea580c", "#f97316", "#f59e0b", "#eab308",
+    "#22c55e", "#3b82f6", "#8b5cf6", "#ec4899",
+    "#10b981", "#6366f1", "#14b8a6", "#06b6d4"
+  ];
+  return colors[id % colors.length];
+}
+
+/* ===== Display Date ===== */
+function renderDate(){
+  let d = currentDate;
+  
+  // Format date as YYYY-MM-DD
+  const dateStr = d.toISOString().split("T")[0];
+  
+  // Display in DD-MM-YYYY format
+  const dateParts = dateStr.split("-");
+  const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  
+  dayNumber.textContent = formattedDate;
+  
+  // Day names
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  dayName.textContent = days[d.getDay()];
+  
+  daySelector.value = dateStr;
+}
+
+/* ===== Display Absences ===== */
+function renderAbsences(){
+  absenceList.innerHTML = "";
+  let key = daySelector.value;
+
+  if(!absences[key] || absences[key].length === 0){
+    absenceList.innerHTML = `
+      <div class="col-12">
+        <div class="empty-state">
+          <i class="bi bi-check-circle-fill"></i>
+          <h5 class="mt-3 text-muted">No absences for this day</h5>
+          <p class="text-muted">All students are present</p>
+        </div>
+      </div>`;
+    
+    absenceCount.textContent = "0 absences";
+    return;
+  }
+
+  // Update counter
+  const count = absences[key].length;
+  absenceCount.textContent = `${count} ${count === 1 ? 'absence' : 'absences'}`;
+  
+  // Display absences
+  absences[key].forEach((a,i)=>{
+    absenceList.innerHTML += `
+    <div class="col-md-6">
+      <div class="absence-card d-flex justify-content-between align-items-center">
+        <div class="d-flex gap-3 align-items-center">
+          <div class="avatar-container">
+            <div class="avatar"
+              style="background:${getAvatarColor(a.id)}"
+              onclick="showStudent(${a.id}, '${a.name}', '${a.reason}', '${a.time}')"
+              title="Click to view details">
+              ${a.avatar.toUpperCase()}
+            </div>
+          </div>
+          <div class="student-info">
+            <div class="student-name">${a.name}</div>
+            <div class="student-id">#${String(a.id).padStart(3,"0")}</div>
+            <div class="student-details">
+              <span>Reason:</span> ${a.reason}<br>
+              <span>Time:</span> ${a.time}
+            </div>
+          </div>
+        </div>
+        <div class="delete-btn" onclick="deleteAbsence(${i})" title="Delete absence">
+          <i class="bi bi-trash"></i>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+/* ===== Show Student Info in Modal ===== */
+function showStudent(id, name, reason, time){
+  // Create modal content professionally
+  document.getElementById("modalContent").innerHTML = `
+    <div class="info-item">
+      <div class="info-label">Student Name</div>
+      <div class="info-value">${name}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Student ID</div>
+      <div class="info-value">#${String(id).padStart(3,"0")}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Absence Reason</div>
+      <div class="info-value">${reason}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Absence Time</div>
+      <div class="info-value">${time}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Date</div>
+      <div class="info-value">${daySelector.value}</div>
+    </div>
+  `;
+  
+  // Show modal
+  const studentModal = new bootstrap.Modal(document.getElementById('studentModal'));
+  studentModal.show();
+}
+
+/* ===== Delete Absence ===== */
+function deleteAbsence(index){
+  if(confirm("Are you sure you want to delete this absence record?")) {
+    let key = daySelector.value;
+    absences[key].splice(index,1);
+    localStorage.setItem("absences",JSON.stringify(absences));
+    renderAbsences();
+  }
+}
+
+/* ===== Change Day ===== */
+function changeDay(step){
+  currentDate.setDate(currentDate.getDate()+step);
+  renderDate();
+  renderAbsences();
+}
+
+/* ===== Reset to Today ===== */
+function resetToToday(){
+  currentDate = new Date();
+  renderDate();
+  renderAbsences();
+}
+
+/* ===== Change Date from Calendar ===== */
+daySelector.onchange = ()=>{
+  currentDate = new Date(daySelector.value);
+  renderDate();
+  renderAbsences();
+};
+
+/* ===== Export PDF ===== */
+function exportToPDF(){
+  // In real application, this would use a PDF library like jsPDF
+  alert("Today's absences will be exported as PDF\n\nIn a real application, a PDF library like jsPDF would be used here.");
+  
+  // Simulate PDF export
+  const key = daySelector.value;
+  const count = absences[key] ? absences[key].length : 0;
+  
+  if(count === 0){
+    alert("No absences to export!");
+    return;
+  }
+  
+  console.log(`Exporting ${count} absences for ${key}`);
+  
+  // In real app: Generate PDF with absences data
+  // const pdf = new jsPDF();
+  // pdf.text(`Absences Report - ${key}`, 20, 20);
+  // ...
+}
+
+/* ===== Go to Another Page ===== */
+function goToAnotherPage(){
+  // In real application, this would navigate to another page
+  alert("Navigating to another page\n\nIn a real application, window.location.href would be used here.");
+  
+  // Example: window.location.href = '/other-page.html';
+}
+
+/* ===== Initialize Application ===== */
+renderDate();
+renderAbsences();
+
+// Set datepicker min/max dates
+const todayStr = new Date().toISOString().split("T")[0];
+daySelector.min = "2024-01-01";
+daySelector.max = "2027-12-31";
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
